@@ -1,15 +1,17 @@
 import React,{useState, useReducer} from 'react'
+import {connect} from "react-redux";
+// function reducer(state, action){
+//     switch(action.type){
+//         case "increment":
+//             return state + 1;
+//         case "decrement":
+//             return state - 1;
+//         default:
+//             console.log("Wrong Type");
+//     }
+// }
 
-function reducer(state, action){
-    switch(action.type){
-        case "increment":
-            return state + 1;
-        case "decrement":
-            return state - 1;
-    }
-}
-
-function Ball() {
+function Ball(props) {
     // let [balls, setBalls] = useState(10);
     // const increment = () => {
     //     setBalls(balls + 1);
@@ -18,15 +20,21 @@ function Ball() {
     //     setBalls(balls - 1);
     // }
 
-    const [balls, dispatch] = useReducer(reducer, 10);
+    // const [balls, dispatch] = useReducer(reducer, 10);
+    console.log(props);
     return (
+        
         <>
             <h1>Balls</h1>
-            <h2>No. of Balls: {balls}</h2>
-            <button onClick={dispatch({type: "increment"})}>+</button>
-            <button onClick={dispatch({type: "decrement"})}>-</button>
+            <h2>No. of Balls: {props.balls}</h2>
+            <button>+</button>
+            <button>-</button>
         </>
     )
 }
 
-export default Ball
+// to get your state variable from redux store dispatch funtion bhi provide krta hai.
+const mapStateToProps = (store)=>{
+    return store;
+} 
+export default connect(mapStateToProps)(Ball);
